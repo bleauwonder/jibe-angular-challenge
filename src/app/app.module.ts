@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ApiService } from './services/api.service';
 import { ContactComponent } from './contact/contact.component';
-import { AutocompleteFilter } from './search/search.component';
+import { SearchComponent } from './search/search.component';
 import { NavComponent } from './nav/nav.component';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { NavComponent } from './nav/nav.component';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    AutocompleteFilter,
+    SearchComponent,
     NavComponent
   ],
   imports: [
