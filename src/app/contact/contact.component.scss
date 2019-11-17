@@ -1,8 +1,22 @@
-.example-container {
+.form-container {
     display: flex;
     flex-direction: column;
   }
   
-  .example-container > * {
-    width: 100%;
+  .header {
+    color: gray;
+    margin: 0px 20px;
+    padding: 20px;
+  }
+  
+  body, html {
+    height: 100%;
+  }
+  
+  .bg {
+    background-image: url("https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }

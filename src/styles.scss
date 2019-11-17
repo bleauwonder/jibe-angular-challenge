@@ -10,7 +10,7 @@ $jibe-coding-challenge-accent: mat-palette($mat-red, A800, A500, A900);
 $jibe-coding-challenge-warn: mat-palette($mat-red);
 
 
-$jibe-coding-challenge-theme: mat-light-theme($jibe-coding-challenge-primary, $jibe-coding-challenge-accent, $jibe-coding-challenge-warn);
+$jibe-coding-challenge-theme: mat-dark-theme($jibe-coding-challenge-primary, $jibe-coding-challenge-accent, $jibe-coding-challenge-warn);
 
 @include angular-material-theme($jibe-coding-challenge-theme);
 
