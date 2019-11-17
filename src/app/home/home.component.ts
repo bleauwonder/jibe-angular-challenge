@@ -13,9 +13,10 @@ export class HomeComponent implements OnInit {
   constructor(private data: ApiService) { }
 
   ngOnInit() {
-    this.data.getJobs().subscribe(data => {
-      this.jobs = data
-      console.log(this.jobs)
+    // indicating that the response is of type 'any'
+    this.data.getJobs().subscribe(response => {
+      this.jobs = response['jobs'];
+      console.log(response);
     })
   }
 
