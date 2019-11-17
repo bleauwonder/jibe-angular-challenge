@@ -3,10 +3,7 @@
 
 @include mat-core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$jibe-coding-challenge-primary: mat-palette($mat-indigo);
+$jibe-coding-challenge-primary: mat-palette($mat-red, 600);
 $jibe-coding-challenge-accent: mat-palette($mat-red, A800, A500, A900);
 
 
@@ -25,5 +22,5 @@ body { margin: 0; font-family: 'Tomorrow', sans-serif; }
 $custom-typography: mat-typography-config(
   $font-family: 'Tomorrow, sans-serif',
   $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(16px, 24px, 500)
+  $body-1: mat-typography-level(16px, 24px, 500),
 );
