@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -10,12 +10,12 @@ import {map, startWith} from 'rxjs/operators';
 })
 
 export class AutocompleteFilter implements OnInit {
-  myControl = new FormControl();
-  options: string[] = ['New York', 'Boston', 'Hoboken', 'Seattle'];
+  titleControl = new FormControl();
+  options: string[] = ['Product Manager', 'Non Linear Flow', 'Video on Job Description', 'Non Linear Reapplyable', 'Test English 9', 'Test English 8', 'Test English 7', 'Test English 6', 'Multilingual Job 1'];
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.titleControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
