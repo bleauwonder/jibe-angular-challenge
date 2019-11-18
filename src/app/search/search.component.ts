@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Jobs } from '../option';
 import { ApiService } from '../services/api.service';
 import { FormControl } from '@angular/forms';
-import { Observable, observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, startWith, debounceTime, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
@@ -20,6 +20,8 @@ export class SearchComponent implements OnInit {
 
   constructor(private apiService: ApiService) {}
 
+  // new try to have the search read what's typed to autocomplete and read the JSON
+  
   lookup(value: string): Observable<Jobs> {
     return this.apiService.search(value.toLowerCase()).pipe(
       map(results => results.options),
@@ -45,6 +47,7 @@ ngOnInit() {
 }
 
 
+// Original AutoComplete with search choices
 
 //   titleControl = new FormControl();
 
