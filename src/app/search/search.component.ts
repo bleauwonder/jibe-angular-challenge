@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Jobs } from '../option';
+import { ApiService } from '../services/api.service';
 import { FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, observable, of } from 'rxjs';
+import { map, startWith, debounceTime, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -13,58 +13,58 @@ import { map, startWith } from 'rxjs/operators';
 
 export class SearchComponent implements OnInit {
 
-  titleControl = new FormControl();
+  public jobAutoComplete$: Observable<Jobs> = null;
+  public autoCompleteControl = new FormControl();
 
   options: string[] = ['Product Manager', 'Non Linear Flow', 'Video on Job Description', 'Non Linear Reapplyable', 'Test English 9', 'Test English 8', 'Test English 7', 'Test English 6', 'Multilingual Job 1'];
-  filteredOptions: Observable<string[]>;
-  isLoading = false;
-  errorMsg: string;
 
-  ngOnInit() {
-    this.filteredOptions = this.titleControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+  constructor(private apiService: ApiService) {}
+
+  lookup(value: string): Observable<Jobs> {
+    return this.apiService.search(value.toLowerCase()).pipe(
+      map(results => results.options),
+      catchError(_ => {
+        return of(null);
+      })
+    );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  }
+ngOnInit() {
+  this.jobAutoComplete$ = this.autoCompleteControl.valueChanges.pipe(
+    startWith(''),
+    debounceTime(300),
+    switchMap(value => {
+      if (value !== '') {
+        return this.lookup(value);
+      } else {
+        return of(null);
+      }
+    })
+  );
 }
- 
+}
+
+
+
+//   titleControl = new FormControl();
+
+//   options: string[] = ['Product Manager', 'Non Linear Flow', 'Video on Job Description', 'Non Linear Reapplyable', 'Test English 9', 'Test English 8', 'Test English 7', 'Test English 6', 'Multilingual Job 1'];
+//   filteredOptions: Observable<string[]>;
+//   isLoading = false;
+//   errorMsg: string;
+
 //   ngOnInit() {
-//     this.titleControl.valueChanges
+//     this.filteredOptions = this.titleControl.valueChanges
 //       .pipe(
-//         debounceTime(500),
-//         tap(() => {
-//           this.errorMsg = "";
-//           this.filteredJobs = [];
-//           this.isLoading = true;
-//         }),
-//         switchMap(value => this.http.get("https://testapi.io/api/crimsonsunset/code-challenge-jobs")
-//           .pipe(
-//             finalize(() => {
-//               this.isLoading = false
-//             }),
-//           )
-//         )
-//       )
-//       .subscribe(data => {
-//         if (data['Search'] == undefined) {
-//           this.errorMsg = data['Error'];
-//           this.filteredJobs = [];
-//         } else {
-//           this.errorMsg = "";
-//           this.filteredJobs = data['Search'];
-//         }
- 
-//         console.log(this.filteredJobs);
-//       });
+//         startWith(''),
+//         map(value => this._filter(value))
+//       );
+//   }
+
+//   private _filter(value: string): string[] {
+//     const filterValue = value.toLowerCase();
+
+//     return this.options.filter(option => option.toLowerCase().includes(filterValue));
 //   }
 // }
-
-
-
+ 
