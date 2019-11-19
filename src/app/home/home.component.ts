@@ -9,7 +9,7 @@ import { ApiService } from '../services/api.service';
 export class HomeComponent implements OnInit {
 
   jobs: Object;
-
+  panelOpenState = false;
   constructor(private data: ApiService) { }
 
   ngOnInit() {
