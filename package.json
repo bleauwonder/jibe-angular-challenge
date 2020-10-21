@@ -31,6 +31,7 @@
     "serialize-javascript": "^4.0.0",
     "tree-kill": "^1.2.2",
     "tslib": "^1.10.0",
+    "webpack-subresource-integrity": "^1.5.1",
     "yargs-parser": "^20.2.1",
     "zone.js": "~0.9.1"
   },
